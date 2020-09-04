@@ -1,0 +1,11 @@
+server:
+  port: 4000
+
+spring:
+  application:
+    name: consumer          # 设置微服务名，以便将来通过微服务名称调用微服务时能够找到
+
+eureka:
+  client:
+    service-url:            # Eureka客户端访问Eureka服务器端使用的地址
+      defaultZone: http://localhost:5000/eureka

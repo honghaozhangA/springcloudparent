@@ -1,0 +1,22 @@
+server:
+  port: 9000
+  servlet:
+    context-path: /bootpath # 先context-path，再zuul-prefix
+
+spring:
+  application:
+    name: zuul
+
+eureka:
+  client:
+    service-url:            # Eureka客户端访问Eureka服务器端使用的地址
+      defaultZone: http://localhost:5000/eureka
+zuul:
+  routes:
+    employee:               # 自定义路由规则的名称，在底层数据结构中是Map的键
+      service-id: feign-consumer    # 目标微服务名称，ZuulRoute类型的一个属性
+      path: /fconsumer/**   # 用来代替微服务名称的路径，ZuulRoute类型的一个属性，/**表示匹配后续多层路径
+  ignored-services: '*'     # 禁用直接使用服务名访问
+  prefix: /zuul-prefix      # 所有请求增加默认前缀
+
+# 地址：http://localhost:9000/bootpath/zuul-prefix/fconsumer/feign/consumer/getEmpWithTestCallBack?str=run
